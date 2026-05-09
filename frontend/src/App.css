@@ -1,0 +1,24 @@
+/* Dark theme styles for AutoPost prototype */
+body {
+  background: #0f0f0f;
+  margin: 0;
+  color: #e0e0e0;
+}
+
+h1, h2, h3 {
+  color: #ffffff;
+}
+
+button {
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+button:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
