@@ -42,46 +42,28 @@ export default function Chatbot({selectedPlatforms, onToggle, onGenerate}){
   }
 
   return (
-    <div style={{border:'1px solid #333', padding:16, borderRadius:8, background:'#1a1a1a'}}>
-      <h3 style={{marginTop:0, marginBottom:4, color:'#fff'}}>Post Generator</h3>
-      <p style={{marginTop:0, marginBottom:12, color:'#999', fontSize:13}}>Write a prompt, select platforms, and generate platform-specific posts.</p>
+    <div className="surface-card chatbot-panel">
+      <div className="chatbot-header">
+        <div className="section-label">Composer</div>
+        <h3>Post Generator</h3>
+      </div>
+      <p className="chatbot-copy">Write a prompt, select platforms, and generate platform-specific posts.</p>
       
       <textarea 
         value={prompt} 
         onChange={e=>setPrompt(e.target.value)} 
         placeholder="Enter your message here..." 
-        style={{
-          width:'100%',
-          height:80,
-          padding:10,
-          borderRadius:6,
-          border:'1px solid #333',
-          background:'#111',
-          color:'#e0e0e0',
-          fontFamily:'inherit',
-          fontSize:13,
-          resize:'vertical'
-        }} 
+        className="chatbot-textarea"
       />
       
-      <div style={{marginTop:12, marginBottom:12}}>
-        <div style={{color:'#999', fontSize:12, marginBottom:6}}>Select platforms to post to:</div>
-        <div style={{display:'flex', flexWrap:'wrap', gap:8}}>
+      <div className="chatbot-platforms">
+        <div className="chatbot-subtitle">Select platforms to post to:</div>
+        <div className="chatbot-chip-row">
           {selectedPlatforms.map(p => (
             <button
               key={p}
               onClick={() => togglePlatform(p)}
-              style={{
-                padding:'6px 12px',
-                borderRadius:6,
-                background: togglingPlatforms.includes(p) ? '#4ade80' : '#333',
-                color: togglingPlatforms.includes(p) ? '#111' : '#aaa',
-                border:'1px solid ' + (togglingPlatforms.includes(p) ? '#4ade80' : '#444'),
-                cursor:'pointer',
-                fontSize:12,
-                fontWeight:600,
-                transition:'all 0.2s'
-              }}
+              className={togglingPlatforms.includes(p) ? 'chip-button active' : 'chip-button'}
             >
               {togglingPlatforms.includes(p) ? '✓' : '◯'} {p}
             </button>
@@ -89,24 +71,15 @@ export default function Chatbot({selectedPlatforms, onToggle, onGenerate}){
         </div>
       </div>
 
-      <div style={{display:'flex',gap:8,marginTop:12}}>
+      <div className="chatbot-footer">
         <button 
           onClick={handleGenerate} 
           disabled={loading || togglingPlatforms.length===0} 
-          style={{
-            padding:'10px 16px',
-            cursor:'pointer',
-            background:'#4ade80',
-            color:'#111',
-            border:'none',
-            borderRadius:6,
-            fontWeight:600,
-            transition:'all 0.2s'
-          }}
+          className="generate-button"
         >
           {loading? 'Generating...' : 'Generate Posts'}
         </button>
-        <div style={{alignSelf:'center', color:'#999', fontSize:13}}>
+        <div className="chatbot-status">
           {togglingPlatforms.length===0 ? 'Select platforms above' : `${togglingPlatforms.length} platform(s) selected`}
         </div>
       </div>
